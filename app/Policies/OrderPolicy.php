@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\Order;
+use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class OrderPolicy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Create a new policy instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * 判断用户的订单权限
+     * @param User|null $user
+     * @param Order $order
+     * @return bool
+     */
+    public function own(?User $user, Order $order)
+    {
+        return $user->id === $order->user_id;
+    }
+
+
+}
